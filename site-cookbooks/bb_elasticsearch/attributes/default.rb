@@ -1,4 +1,6 @@
 normal[:elasticsearch][:version] = '1.3.4'
+normal[:elasticsearch][:plugins]['elasticsearch/elasticsearch-cloud-aws']['version'] = '2.3.0'
+
 normal[:elasticsearch][:download_url] = 'https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.4.tar.gz'
 normal[:elasticsearch][:checksum] = '18af629c388b442bc8daa39754ea1f39a606acd7647fe042aed79ef014a7d330'
 
