@@ -33,6 +33,7 @@ end
   load-metrics.rb
   memory-metrics.rb
   metrics-curl.rb
+  metrics-net.rb
   metrics-splunk.rb
   mongodb-metrics.rb
   nginx-metrics.rb

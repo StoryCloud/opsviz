@@ -67,38 +67,38 @@
     "BastionInstanceType":{
         "Type" : "String",
         "Default" : "m3.medium",
-        "AllowedValues" : ["m3.medium" ],
-        "Description" : "Default is m3.medium."
+        "AllowedValues" : ["t2.micro", "t2.small", "m3.medium" ],
+        "Description" : "Enter t2.micro, t2.small or m3.medium. Default is m3.medium."
     },
     "RabbitMQInstanceType":{
         "Type" : "String",
         "Default" : "r3.large",
-        "AllowedValues" : ["m3.large", "c3.large", "r3.large"],
-        "Description" : "Enter m3.large, c3.large, or r3.large. Default is r3.large."
+        "AllowedValues" : ["t2.small", "m3.medium", "m3.large", "c3.large", "r3.large"],
+        "Description" : "Enter t2.small, m3.medium, m3.large, c3.large, or r3.large. Default is r3.large."
     },
     "GraphiteInstanceType":{
         "Type" : "String",
         "Default" : "c3.large",
-        "AllowedValues" : ["m3.medium", "m3.large", "c3.large", "r3.large"],
-        "Description" : "Enter m3.medium, m3.large, c3.large, or r3.large. Default is c3.large."
+        "AllowedValues" : ["t2.small", "m3.medium", "m3.large", "c3.large", "r3.large"],
+        "Description" : "Enter t2.small, m3.medium, m3.large, c3.large, or r3.large. Default is c3.large."
     },
     "ElasticSearchInstanceType":{
         "Type" : "String",
         "Default" : "r3.large",
-        "AllowedValues" : ["m3.medium", "m3.large", "c3.large", "r3.large"],
-        "Description" : "Enter m3.medium, m3.large, c3.large, or r3.large. Default is r3.large."
+        "AllowedValues" : ["t2.small", "m3.medium", "m3.large", "c3.large", "r3.large"],
+        "Description" : "Enter t2.small, m3.medium, m3.large, c3.large, or r3.large. Default is r3.large."
     },
     "LogstashInstanceType":{
         "Type" : "String",
         "Default" : "c3.large",
-        "AllowedValues" : ["m3.medium", "m3.large", "c3.large", "r3.large"],
-        "Description" : "Enter m3.medium, m3.large, c3.large, or r3.large. Default is c3.large."
+        "AllowedValues" : ["t2.small", "m3.medium", "m3.large", "c3.large", "r3.large"],
+        "Description" : "Enter t2.small, m3.medium, m3.large, c3.large, or r3.large. Default is c3.large."
     },
     "DashboardInstanceType":{
         "Type" : "String",
         "Default" : "c3.large",
-        "AllowedValues" : ["m3.medium", "m3.large", "c3.large", "r3.large", "m3.2xlarge"],
-        "Description" : "Enter m3.medium, m3.large, c3.large, or r3.large. Default is c3.large."
+        "AllowedValues" : ["t2.micro", "t2.small", "m3.medium", "m3.large", "c3.large", "r3.large", "m3.2xlarge"],
+        "Description" : "Enter t2.micro, t2.small, m3.medium, m3.large, c3.large, or r3.large. Default is c3.large."
     },
     "RabbitMQUser": {
       "Description": "RabbitMQ User",
@@ -307,7 +307,7 @@
             },
             "plugins": {
               "elasticsearch/elasticsearch-cloud-aws": {
-                "version": "2.2.0"
+                "version": "2.3.0"
               }
             },
             "cloud": {
@@ -318,7 +318,19 @@
               }
             },
             "discovery": {
-              "type": "ec2"
+              "type": "ec2",
+              "ec2": {
+                "groups": {
+                  "Ref": "InternalSecurityGroup"
+                }
+              },
+              "zen": {
+                "ping": {
+                  "multicast": {
+                    "enabled": false
+                  }
+                }
+              }
             },
             "http_auth": false,
             "index.number_of_shards": 8,
