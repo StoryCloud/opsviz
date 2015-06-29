@@ -22,6 +22,7 @@ if node[:route53][:zone_id] && !node[:route53][:zone_id].empty?
     end
 
     # If this is the first instance in a layer and the layer has an elb add a record for that
+    log "Possibly creating route53 record for first of #{node[:opsworks][:layers][layer]['elb-load-balancers'].size} associated ELBs"
     if node[:opsworks][:layers][layer][:instances].keys[0] == node[:opsworks][:instance][:hostname] && !node[:opsworks][:layers][layer]["elb-load-balancers"].empty?
       elb = node[:opsworks][:layers][layer]["elb-load-balancers"].first
 

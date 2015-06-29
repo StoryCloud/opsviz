@@ -225,6 +225,29 @@
       "Private3": {
         "CIDR": "10.133.4.0/24"
       }
+    },
+    "RootDeviceTypes": {
+      "t2.micro": {
+        "RootDeviceType": "ebs"
+      },
+      "t2.small": {
+        "RootDeviceType": "ebs"
+      },
+      "m3.medium": {
+        "RootDeviceType": "instance-store"
+      },
+      "m3.large": {
+        "RootDeviceType": "instance-store"
+      },
+      "c3.large": {
+        "RootDeviceType": "instance-store"
+      },
+      "r3.large": {
+        "RootDeviceType": "instance-store"
+      },
+      "m3.2xlarge": {
+        "RootDeviceType": "instance-store"
+      }
     }
   },
   "Resources": {
@@ -287,7 +310,8 @@
             },
             "domain_name": {
               "Ref": "Route53DomainName"
-            }
+            },
+            "fog_version": "1.29"
           },
           "aws_region": {
             "Ref": "AWS::Region"
@@ -529,6 +553,7 @@
           }
         ],
         "InstanceType": { "Ref":"BastionInstanceType"} ,
+        "RootDeviceType": { "Fn::FindInMap" : [ "RootDeviceTypes", { "Ref" : "BastionInstanceType" }, "RootDeviceType"] },
         "SubnetId": {
           "Ref": "PublicSubnet"
         }
@@ -601,7 +626,8 @@
             "Ref": "OpsWorksDashboardLayer"
           }
         ],
-        "InstanceType": { "Ref" : "DashboardInstanceType" }
+        "InstanceType": { "Ref" : "DashboardInstanceType" },
+        "RootDeviceType": { "Fn::FindInMap" : [ "RootDeviceTypes", { "Ref" : "DashboardInstanceType" }, "RootDeviceType"] }
       }
     },
     "OpsWorksGraphiteLayer": {
@@ -673,7 +699,8 @@
             "Ref": "OpsWorksGraphiteLayer"
           }
         ],
-        "InstanceType": { "Ref" : "GraphiteInstanceType" }
+        "InstanceType": { "Ref" : "GraphiteInstanceType" },
+        "RootDeviceType": { "Fn::FindInMap" : [ "RootDeviceTypes", { "Ref" : "GraphiteInstanceType" }, "RootDeviceType"] }
       }
     },
     "OpsWorksElasticSearchLayer": {
@@ -746,6 +773,7 @@
           }
         ],
         "InstanceType": { "Ref" : "ElasticSearchInstanceType" },
+        "RootDeviceType": { "Fn::FindInMap" : [ "RootDeviceTypes", { "Ref" : "ElasticSearchInstanceType" }, "RootDeviceType"] },
         "SubnetId": { "Ref" : "PrivateSubnet0" }
       }
     },
@@ -764,6 +792,7 @@
           }
         ],
         "InstanceType": { "Ref" : "ElasticSearchInstanceType" },
+        "RootDeviceType": { "Fn::FindInMap" : [ "RootDeviceTypes", { "Ref" : "ElasticSearchInstanceType" }, "RootDeviceType"] },
         "SubnetId": { "Ref" : "PrivateSubnet1" }
       }
     },
@@ -782,6 +811,7 @@
           }
         ],
         "InstanceType": { "Ref" : "ElasticSearchInstanceType" },
+        "RootDeviceType": { "Fn::FindInMap" : [ "RootDeviceTypes", { "Ref" : "ElasticSearchInstanceType" }, "RootDeviceType"] },
         "SubnetId": { "Ref" : "PrivateSubnet2" }
       }
     },
@@ -854,7 +884,8 @@
             "Ref": "OpsWorksRabbitMQLayer"
           }
         ],
-        "InstanceType": { "Ref" : "RabbitMQInstanceType" }
+        "InstanceType": { "Ref" : "RabbitMQInstanceType" },
+        "RootDeviceType": { "Fn::FindInMap" : [ "RootDeviceTypes", { "Ref" : "RabbitMQInstanceType" }, "RootDeviceType"] }
       }
     },
     "OpsWorksLogstashLayer": {
@@ -923,7 +954,8 @@
             "Ref": "OpsWorksLogstashLayer"
           }
         ],
-        "InstanceType": { "Ref" : "LogstashInstanceType" }
+        "InstanceType": { "Ref" : "LogstashInstanceType" },
+        "RootDeviceType": { "Fn::FindInMap" : [ "RootDeviceTypes", { "Ref" : "LogstashInstanceType" }, "RootDeviceType"] }
       }
     },
     "OpsWorksServiceRole": {

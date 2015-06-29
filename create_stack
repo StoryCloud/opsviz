@@ -106,13 +106,13 @@ class OpsVizStackCreator(object):
         print params
 
         template_url = params.pop('TemplateUrl', None)
-        create_stack_kwargs = template_url ? { 'template_url': template_url } : { 'template_body': self.read_template() }
+        create_stack_kwargs = { 'template_url': template_url } if template_url else { 'template_body': self.read_template() }
         create_stack_kwargs.update({
             'stack_name': self.opts.stack_name,
             'capabilities': ['CAPABILITY_IAM'],
             'parameters': params.items(),
             'disable_rollback': True
-        }}
+        })
         stack_id = self.cf.create_stack(**create_stack_kwargs)
 
         #events we have already printed out
