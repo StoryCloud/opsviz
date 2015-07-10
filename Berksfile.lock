@@ -18,6 +18,9 @@ DEPENDENCIES
     revision: 71b3aa2cf4116d04f9fb5272b664e08cf2b1c407
   nginx
     path: nginx
+  openvpnas
+    git: https://github.com/rjocoleman/openvpnas.git
+    revision: 21acde18d927975bc1ed55b2b693f3b6cf9cbb58
   openvpnas_server
     path: site-cookbooks/openvpnas_server
   rabbitmq_cluster
@@ -135,7 +138,8 @@ GRAPH
     build-essential (>= 0.0.0)
     yum-epel (>= 0.0.0)
   ohai (2.0.1)
-  openvpnas (0.1.4)
+  openvpnas (0.1.6)
+    apt (>= 0.0.0)
     chef-sugar (>= 0.0.0)
     citadel (>= 0.0.0)
     line (>= 0.0.0)

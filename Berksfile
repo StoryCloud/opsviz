@@ -11,6 +11,7 @@ cookbook 'kibana', '~> 0.1.8'
 cookbook 'logstash', '~> 0.1.0', git: 'https://github.com/foxycoder/chef-logstash.git'
 cookbook 'sensu', '~> 2.6.0'
 cookbook 'statsd', '~> 1.1.10', git: 'https://github.com/hectcastro/chef-statsd.git'
+cookbook 'openvpnas', git: 'https://github.com/rjocoleman/openvpnas.git'
 
 # Our Cookbooks
 cookbook 'openvpnas_server', '~> 0.1.0', path: './site-cookbooks/openvpnas_server'
