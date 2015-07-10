@@ -525,14 +525,18 @@
           },
           {
             "Ref": "InternalSecurityGroup"
+          },
+          {
+            "Ref": "VpnServerSecurityGroup"
           }
         ],
         "CustomRecipes": {
           "Setup": [
-            "bb_monitor::route53",
-            "bb_monitor::logstash_agent"
+            "bb_monitor::logstash_agent",
+            "openvpnas_server::default"
           ],
           "Configure": [
+            "bb_monitor::route53",
             "bb_monitor::sensu_client"
           ],
           "Deploy": [],
@@ -599,10 +603,10 @@
             "bb_monitor::sensu_server",
             "bb_monitor::flapjack",
             "bb_monitor::nginx",
-            "bb_monitor::route53",
             "bb_monitor::logstash_agent"
           ],
           "Configure": [
+            "bb_monitor::route53",
             "bb_monitor::sensu_client"
           ],
           "Deploy": [],
@@ -665,10 +669,10 @@
         "CustomRecipes": {
           "Setup": [
             "bb_monitor::graphite",
-            "bb_monitor::route53",
             "bb_monitor::logstash_agent"
           ],
           "Configure": [
+            "bb_monitor::route53",
             "bb_monitor::sensu_client"
           ],
           "Deploy": [],
@@ -738,10 +742,10 @@
         "CustomRecipes": {
           "Setup": [
             "bb_elasticsearch",
-            "bb_monitor::route53",
             "bb_monitor::logstash_agent"
           ],
           "Configure": [
+            "bb_monitor::route53",
             "bb_monitor::sensu_client"
           ],
           "Deploy": [],
@@ -850,10 +854,10 @@
         "CustomRecipes": {
           "Setup": [
             "rabbitmq_cluster",
-            "bb_monitor::route53",
             "bb_monitor::logstash_agent"
           ],
           "Configure": [
+            "bb_monitor::route53",
             "bb_monitor::sensu_client"
           ],
           "Deploy": [],
@@ -922,10 +926,10 @@
         ],
         "CustomRecipes": {
           "Setup": [
-            "bb_monitor::route53",
             "bb_monitor::logstash_server"
           ],
           "Configure": [
+            "bb_monitor::route53",
             "bb_monitor::sensu_client"
           ],
           "Deploy": [],
@@ -1470,6 +1474,35 @@
             "IpProtocol": "tcp",
             "FromPort": "0",
             "ToPort": "65535",
+            "CidrIp": "0.0.0.0/0"
+          }
+        ]
+      }
+    },
+    "VpnServerSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Allow web and VPN client access to the VPN server",
+        "VpcId": {
+          "Ref": "VPC"
+        },
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "443",
+            "ToPort": "443",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "943",
+            "ToPort": "943",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "udp",
+            "FromPort": "1194",
+            "ToPort": "1194",
             "CidrIp": "0.0.0.0/0"
           }
         ]

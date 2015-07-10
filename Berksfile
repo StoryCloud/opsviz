@@ -13,6 +13,7 @@ cookbook 'sensu', '~> 2.6.0'
 cookbook 'statsd', '~> 1.1.10', git: 'https://github.com/hectcastro/chef-statsd.git'
 
 # Our Cookbooks
+cookbook 'openvpnas_server', '~> 0.1.0', path: './site-cookbooks/openvpnas_server'
 cookbook 'rabbitmq_cluster', '~> 0.1.0', path: './site-cookbooks/rabbitmq_cluster'
 cookbook 'bb_elasticsearch', '~> 0.1.0', path: './site-cookbooks/bb_elasticsearch'
 cookbook 'bb_monitor', '~> 0.1.0', path: './site-cookbooks/bb_monitor'
