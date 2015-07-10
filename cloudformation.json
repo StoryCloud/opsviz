@@ -141,10 +141,6 @@
       "Description": "RabbitMQ Statsd Password",
       "Type": "String"
     },
-    "OpenVpnServerAdminPassword": {
-      "Description": "OpenVPN server admin password",
-      "Type": "String"
-    },
     "GraphiteVolumeSize": {
       "Description": "Size of disk in GB to use for graphite ebs volumes",
       "Type": "Number",
