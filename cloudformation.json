@@ -141,6 +141,10 @@
       "Description": "RabbitMQ Statsd Password",
       "Type": "String"
     },
+    "OpenVpnServerAdminPassword": {
+      "Description": "OpenVPN server admin password",
+      "Type": "String"
+    },
     "GraphiteVolumeSize": {
       "Description": "Size of disk in GB to use for graphite ebs volumes",
       "Type": "Number",
@@ -304,6 +308,11 @@
         },
         "CustomJson": {
           "chef_environment": "production",
+          "openvpnas_server": {
+            "admin_password": {
+              "Ref": "OpenVpnServerAdminPassword"
+            }
+          },
           "route53": {
             "zone_id": {
               "Ref": "Route53ZoneId"
