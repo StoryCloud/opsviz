@@ -7,6 +7,7 @@ default[:bb_external][:sensu][:subscriptions] = ["all"]
 default[:bb_external][:sensu][:rabbitmq][:user] = "sensu"
 default[:bb_external][:sensu][:rabbitmq][:ssl] = true
 default[:bb_external][:sensu][:rabbitmq][:port] = 5671
+default[:bb_external][:sensu][:enable_client_service] = true
 
 # Default setting for mysql user for sensu plugins
 default[:bb_external][:sensu][:mysql][:user] = "sensu"

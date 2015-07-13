@@ -69,4 +69,7 @@ unless platform_family?("windows")
   end
 end
 
-include_recipe "sensu::client_service"
+
+if node[:bb_external][:sensu][:enable_client_service]
+  include_recipe "sensu::client_service"
+end
