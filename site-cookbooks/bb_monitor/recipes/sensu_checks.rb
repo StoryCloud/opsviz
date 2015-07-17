@@ -81,6 +81,14 @@ sensu_check "metrics-net" do
   interval 60
 end
 
+sensu_check "metric-disk-space" do
+  type "metric"
+  command "metrics-disk-space.rb --scheme stats.:::name:::.disk"
+  handlers node[:bb_monitor][:sensu][:default_metric_handlers]
+  subscribers ["app"]
+  interval 60
+end
+
 include_recipe "sensu"
 
 sensu_check "rabbitmq-messages" do
