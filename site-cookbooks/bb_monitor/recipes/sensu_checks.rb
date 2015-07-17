@@ -86,7 +86,7 @@ sensu_check "metric-disk-space" do
   command "metrics-disk-space.rb --scheme stats.:::name:::.disk"
   handlers node[:bb_monitor][:sensu][:default_metric_handlers]
   subscribers ["app"]
-  interval 60
+  interval 300
 end
 
 include_recipe "sensu"
