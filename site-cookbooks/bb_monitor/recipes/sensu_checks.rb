@@ -85,7 +85,15 @@ sensu_check "metric-disk-space" do
   type "metric"
   command "metrics-disk-space.rb --scheme stats.:::name:::.disk"
   handlers node[:bb_monitor][:sensu][:default_metric_handlers]
-  subscribers ["app"]
+  subscribers ["demo"]
+  interval 300
+end
+
+sensu_check "demo-check-kafka-cluster-status" do
+  type "metric"
+  command "check-kafka-cluster-status.rb --host :::exhibitor_http_host::: --port :::exhibitor_http_port::: --chroot :::zookeeper_kafka_chroot::: --topics chatminder"
+  handlers node[:bb_monitor][:sensu][:default_check_handlers]
+  subscribers ["msg"]
   interval 300
 end
 
