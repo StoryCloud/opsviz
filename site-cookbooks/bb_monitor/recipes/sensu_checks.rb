@@ -89,8 +89,16 @@ sensu_check "metric-disk-space" do
   interval 300
 end
 
-sensu_check "demo-check-kafka-cluster-status" do
+sensu_check "nginx-metrics" do
   type "metric"
+  command "nginx-metrics.rb --host localhost --port 88 --scheme stats.:::name:::.nginx"
+  handlers node[:bb_monitor][:sensu][:default_metric_handlers]
+  subscribers ["app"]
+  interval 300
+end
+
+sensu_check "check-kafka-cluster-status" do
+  type "check"
   command "check-kafka-cluster-status.rb --host :::exhibitor_http_host::: --port :::exhibitor_http_port::: --chroot :::zookeeper_kafka_chroot::: --topics chatminder"
   handlers node[:bb_monitor][:sensu][:default_check_handlers]
   subscribers ["msg"]

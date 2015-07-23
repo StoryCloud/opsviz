@@ -304,11 +304,6 @@
         },
         "CustomJson": {
           "chef_environment": "production",
-          "openvpnas_server": {
-            "admin_password": {
-              "Ref": "OpenVpnServerAdminPassword"
-            }
-          },
           "route53": {
             "zone_id": {
               "Ref": "Route53ZoneId"
