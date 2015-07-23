@@ -98,7 +98,6 @@ sensu_check "nginx-metrics" do
 end
 
 sensu_check "check-kafka-cluster-status" do
-  type "check"
   command "check-kafka-cluster-status.rb --host :::exhibitor_http_host::: --port :::exhibitor_http_port::: --chroot :::zookeeper_kafka_chroot::: --topics chatminder"
   handlers node[:bb_monitor][:sensu][:default_check_handlers]
   subscribers ["msg"]
